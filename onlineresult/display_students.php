@@ -6,7 +6,7 @@ include('template/header.php'); ?>
 	<div class="container">
 		<div class="col-sm-8">
 			<table class="table table-hover">
-			<tr> Students enrolled in a Class </tr>
+			<tr><b> Students enrolled in a Class</b> </tr>
 			<?php 
 			$class_id = $_GET['class_id'];
 			$school_id = $_SESSION["school_id"];
@@ -20,13 +20,12 @@ include('template/header.php'); ?>
 				<td>
 					<a href="add_attendance.php?class_id=<?php echo $class_id?>&student_id=<?php echo $student_id?>">Attendance</a>
 				</td>
-				<td><a href="">Result</td>
+				<td><a href="results.php?student_id=<?php echo $student_id?>">Result</td>
 				<?php
 				echo '</tr>';	
 			}
 		
-
-			?>
+		?>
 
 			</table>
 		</div>

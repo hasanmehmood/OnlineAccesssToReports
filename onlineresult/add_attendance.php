@@ -14,8 +14,6 @@ include('template/header.php'); ?>
 				$district_id = $_SESSION["district_id"];
 				$town_id = $_SESSION["town_id"];
 
-
-			
 			?>
 			<form action="process_attendance.php?studentid=<?php echo $student_id.'&classid='.$class_id; ?>" method="post" accept-charset="utf-8" role="form">
 			

@@ -40,8 +40,20 @@ include('connect.php');
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="attendance.php">Attendence</a></li>
+                <li><a href="index.php">Home</a></li>
+                <?php
+        if(isset($_SESSION["admin"])){ ?>
+        <li><a href="display_classes.php">Admin</a></li>
+     <?php } ?>
+                <li><a href="view_attendance.php">Attendence</a></li>
+                <li><a href="view_results.php">Result</a></li>
+                <li><a href="enter_comp.php">Complaint</a></li>
+          <?php
+        if(isset($_SESSION["admin"])){ ?>
+        <li><a href="disp_comp.php">Display Complaints</a></li>
+     <?php }
+
+        ?>
 				<li class="pull-right">
           <?php if(!isset($_SESSION["admin"])){ ?>
           <a href="login.php">Login</a>
@@ -51,8 +63,8 @@ include('connect.php');
           <a href="logout.php">Logout</a>
           <?php } ?>
 
-
         </li>
+
                
               </ul>
             </div>

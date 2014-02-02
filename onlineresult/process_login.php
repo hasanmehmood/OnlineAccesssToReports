@@ -6,12 +6,11 @@ if(isset($_POST["submit"]))
 		
 			$username = $_POST["username"];
 			$password = $_POST["password"];
-			$choice	= $_POST["choice"];
+			//$choice	= $_POST["choice"];
 			
-			if(!empty($username)&&!empty($password)&&!empty($choice))
+			if(!empty($username)&&!empty($password))
 			{
-				if($choice=='admin')	
-				{
+				
 					$q = mysql_query("select * from admin where username = '$username' && password='$password'");
 					if(mysql_num_rows($q)==0)
 						header('Location: login.php?msg=e');
@@ -32,11 +31,10 @@ if(isset($_POST["submit"]))
 							$fetch_district = mysql_fetch_array($q);
 							$_SESSION['district_id'] = $fetch_district['d_id'];
 							$district = $_SESSION['district_id'];
-
 							
 							header('Location: display_classes.php');	
 					}
-				}
+				
 			}
 			else
 				header('Location: login.php?msg=e');		

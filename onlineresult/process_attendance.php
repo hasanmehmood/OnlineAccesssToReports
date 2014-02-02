@@ -9,8 +9,14 @@ include('connect.php');
 	$classid = $_GET['classid'];
 	$status = $_POST['status'];
 	
+	$date =  explode('-',$date);
+            
+              $day = $date[2];
+              $month = $date[1];
+              $year = $date[0];
+
 	
-	if(mysql_query("insert into attendance values ($did,$tid,$schoolid,$classid,$studentid,'$date','$status')") or die(mysql_error()))
+	if(mysql_query("insert into attendance values ($did,$tid,$schoolid,$classid,$studentid,'$status',$day,$month,$year)") or die(mysql_error()))
 		header("Location: display_students.php?class_id=$classid");
 	else
 		echo 'problem';

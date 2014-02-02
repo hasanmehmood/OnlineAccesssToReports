@@ -12,34 +12,13 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-          <img data-src="images/slider/s1.jpg" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-            </div>
-          </div>
+          
         </div>
         <div class="item">
-          <img data-src="images/slider/s1.jpg" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1></h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
+ 
         </div>
         <div class="item">
-          <img data-src="images/slider/s1.jpg" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
+          
         </div>
       </div>
       <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
@@ -54,42 +33,67 @@
 
 	<div>
 			<div class="container">
-				<div class="col-sm-4">
-					<img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-					  <h2></h2>
-					  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-					  <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+				<div class="col-sm-3">
+					<img src="images/about.jpg" height="150" width="150" >
+					  <h2>About Site</h2>
+					  <p>We've implemented an open source prototype for electronic access to school reports for all govt. schools of KPK which acts as an online bridge b/w parents and teachers on the daily progress of student/children!</p>
+					  <p></p>
 				</div>
-				<div class="col-sm-4">
-					<img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+				<div class="col-sm-3">
+					<img  src="images/attendance1.jpg" height="150" width="150">
 					  <h2>Specific Student</h2>
-					  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+					  <p>Please enter ID of the student and select a date from calender to find attendance on a particular day</p>
 				   
             <form action="" method="get" accept-charset="utf-8" role="form">
               <input type="text" name="student_id" class="form-control" placeholder="Student ID" /><br>
+              <input type="date" name="date">
               <input type="submit" class="btn btn-primary">
-            </form>
+            </form><br>
+
             <?php 
-            if(isset($_GET['student_id']))
+            
+
+            if(!empty($_GET['student_id']) && !empty($_GET['date']))
             {
               $student_id = $_GET['student_id'];
-              $date = date('y-m-d');
+              $date = $_GET['date'];
+              $date =  explode('-',$date);
+            
+              $day = $date[2];
+              $month = $date[1];
+              $year = $date[0];
 
-              $q = mysql_query("select * from attendance where student = $student_id && date = $date");
-               
 
+              $q = mysql_query("select * from attendance where student = $student_id && day = $day && month = $month && year = $year");
+              $row = mysql_fetch_array($q);
+              $status = $row['status'];
+              if($status=='p')
+                echo '<div class="alert alert-success">Your child is present</div>';
+              else if($status=='a')
+                echo '<div class="alert alert-danger">Your child is absent</div>';
+              else if($status=='l')
+                echo '<div class="alert alert-warning">Your child is at leave</div>'; 
+              else
+                echo '<div class="alert alert-danger">record not found</div>';
+            }
+            else{
+              echo '<div class="alert alert-danger">Please provide both, ID and Date</div>';
             }
             ?>
         
-
-
         </div>
-				<div class="col-sm-4">
-					<img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-					  <h2>Attendance</h2>
-					  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-					  <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+				<div class="col-sm-3">
+					<img src="images/chart.jpg" height="150" width="150">
+					  <h2>Statistical Attendance</h2>
+					  <p>Follow the link to find out number of students present in a Town , School, Student</p>
+					  <p><a class="btn btn-primary" href="view_attendance.php" role="button">View Page &raquo;</a></p>
 				</div>
+        <div class="col-sm-3">
+          <img src="images/attendance1.jpg" height="150" width="150">
+            <h2>View Result</h2>
+            <p>Follow the link to find out result of students</p>
+            <p><a class="btn btn-primary" href="view_results.php" role="button">View Page &raquo;</a></p>
+        </div>
 			</div>
 	
 	</div>
